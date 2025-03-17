@@ -15,13 +15,17 @@ function App() {
 
   const { profit = [], team = [] } = data || {};
 
+  /* Вычисляет доход на количество месяцев (примем, что список profit каждый месяц одинаков) */
   const profitSum = useMemo(() => month * profit.reduce((acc, i) => acc + i, 0), [month, profit]);
 
   const date = useMemo(() => `${month}/${year}`, [month, year]);
 
   const getApi = useCallback(() => fetchBestEmployeesData(year), [year]);
 
+   /* Увеличивает месяц */
   const onIncMonth = useCallback(() => setMonth((count) => (count === 12 ? 1 : count + 1)), []);
+
+  /* Уменьшает год до 2018го */
   const onDecYear = useCallback(() => setYear((count) => (count === 2018 ? 2018 : count - 1)), []);
 
   return (
